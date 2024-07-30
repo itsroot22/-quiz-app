@@ -205,9 +205,7 @@ const questions = [
             {text: "Ringgit", correct: "false"}
         ]
     },
-    // ... Add more questions here
-];
-
+    
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
@@ -219,6 +217,7 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     nextButton.innerHTML = "Next";
+    nextButton.style.display = "none";
     showQuestion();
 }
 
@@ -244,6 +243,7 @@ function resetState() {
     while (answerButtonsElement.firstChild) {
         answerButtonsElement.removeChild(answerButtonsElement.firstChild);
     }
+    nextButton.style.display = "none";
 }
 
 function selectAnswer(e) {
@@ -257,11 +257,12 @@ function selectAnswer(e) {
     }
 
     Array.from(answerButtonsElement.children).forEach(button => {
+        button.disabled = true;
         if (button.dataset.correct === "true") {
             button.classList.add("correct");
         }
-        button.disabled = true;
     });
+    nextButton.style.display = "block";
 }
 
 function handleNextButton() {
@@ -277,6 +278,8 @@ function showScore() {
     resetState();
     questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
     nextButton.innerHTML = "Restart";
+    nextButton.style.display = "block";
+    nextButton.removeEventListener("click", handleNextButton);
     nextButton.addEventListener("click", startQuiz);
 }
 
@@ -288,4 +291,21 @@ nextButton.addEventListener("click", () => {
     }
 });
 
-startQuiz();
+document.addEventListener('DOMContentLoaded', startQuiz);
+
+
+const style = document.createElement('style');
+style.innerHTML = `
+  .correct {
+    background-color: green;
+    color: white;
+  }
+  .incorrect {
+    background-color: red;
+    color: white;
+  }
+`;
+document.head.appendChild(style);
+
+];
+
