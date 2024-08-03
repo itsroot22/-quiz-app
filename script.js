@@ -1,11 +1,12 @@
 const questions = [
-    {  
-        question: "Which is the largest animal on earth?",
+   
+    {
+        question: "What is the tallest mountain in the world?",
         answers: [
-            {text: "Shark", correct: "false"},
-            {text: "Whale", correct: "true"},
-            {text: "Elephant", correct: "false"},
-            {text: "Monkey", correct: "false"}
+            {text: "Mount Kilimanjaro", correct: "false"},
+            {text: "Mount Everest", correct: "true"},
+            {text: "K2", correct: "false"},
+            {text: "Mount Fuji", correct: "false"}
         ]
     },
     {
@@ -205,7 +206,9 @@ const questions = [
             {text: "Ringgit", correct: "false"}
         ]
     },
-    
+   
+];
+
 const questionElement = document.getElementById("question");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
@@ -306,6 +309,3 @@ style.innerHTML = `
   }
 `;
 document.head.appendChild(style);
-
-];
-
